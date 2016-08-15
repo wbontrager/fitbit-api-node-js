@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 
 var FitbitApiClient = require("fitbit-node");
+console.log("creating client with: " + process.env.FITBIT_CLIENT_ID.substring(0,4));
+console.log("creating client with: " + process.env.FITBIT_CLIENT_SECRET.substring(0,4));
 var client = new FitbitApiClient(process.env.FITBIT_CLIENT_ID, process.env.FITBIT_CLIENT_SECRET);
 
 app.set('port', (process.env.PORT || 5000));
