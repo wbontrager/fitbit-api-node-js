@@ -44,7 +44,7 @@ app.get("/oauth/fitbit/callback", function (req, res) {
     client.get("/profile.json", result.access_token).then(function (results) {
       console.log('    Fitbit callback get profile success');
       console.log('    result: ' + results);
-      res.send(results);
+      res.send(results[0]);
     });
   }).catch(function (error) {
     console.log('  Fitbit callback getAccessToken error');
@@ -52,11 +52,26 @@ app.get("/oauth/fitbit/callback", function (req, res) {
   });
 });
 
-app.get("/fitbit/callback_2", function (req, res) {
-  console.log('Fitbit callback 2 hit');
-  response.send("callback 2" + cool());
+app.get("/fitbit/subscription/webhook", function (request, response) {
+  console.log('Fitbit Subscription Webhook');
+
+  console.log('request: ');
+  console.log(request);
+
+  console.log('verify param');
+  console.log(request.query.verify);
+  // Verify code
+  // TODO: fork fitbit-node, add subscription stuff, submit PR back to fitbit-node
+  var incomingVerificationCode = request.query.verify;
+  if (incomingVerificationCode == process.env.FITBIT_CLIENT_SECRET) {
+    // TODO: Handle incoming subscription notification
+    response.status(204).send({});
+  } else {
+    response.status(404).send({});
+  }
 });
 
+// TODO: Delete Subscription
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
