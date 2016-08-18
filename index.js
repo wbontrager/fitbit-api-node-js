@@ -31,7 +31,7 @@ app.get('/times', function(request, response) {
 
 // Fitbit API Authorization
 var authorizeCallbackUrl = "https://hidden-reef-88758.herokuapp.com/oauth/fitbit/callback";
-var accessCallbackUrl = "https://hidden-reef-88758.herokuapp.com/fitbit/callback_2";
+var accessCallbackUrl = authorizeCallbackUrl;
 app.get("/oauth/fitbit/authorize", function (req, res) {
   console.log('Fitbit authorization started');
   res.redirect(client.getAuthorizeUrl('activity profile sleep social', authorizeCallbackUrl));
