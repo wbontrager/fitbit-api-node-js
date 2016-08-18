@@ -44,7 +44,7 @@ app.get("/oauth/fitbit/callback", function (req, res) {
     client.get("/profile.json", result.access_token).then(function (results) {
       console.log('    Fitbit callback get profile success');
       console.log('    result: ' + results);
-      res.send(results[0]);
+      res.send(results);
     });
   }).catch(function (error) {
     console.log('  Fitbit callback getAccessToken error');
