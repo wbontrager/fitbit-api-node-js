@@ -30,14 +30,14 @@ app.get('/times', function(request, response) {
 });
 
 // Fitbit API Authorization
-var authorizeCallbackUrl = "https://hidden-reef-88758.herokuapp.com/fitbit/callback";
+var authorizeCallbackUrl = "https://hidden-reef-88758.herokuapp.com/oauth/fitbit/callback";
 var accessCallbackUrl = "https://hidden-reef-88758.herokuapp.com/fitbit/callback_2";
-app.get("/fitbit/authorize", function (req, res) {
+app.get("/oauth/fitbit/authorize", function (req, res) {
   console.log('Fitbit authorization started');
   res.redirect(client.getAuthorizeUrl('activity profile sleep social', authorizeCallbackUrl));
 });
 
-app.get("/fitbit/callback", function (req, res) {
+app.get("/oauth/fitbit/callback", function (req, res) {
   console.log('Fitbit callback hit');
   client.getAccessToken(req.query.code, accessCallbackUrl).then(function (result) {
     console.log('  Fitbit callback getAccessToken success');
