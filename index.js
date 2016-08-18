@@ -63,7 +63,7 @@ app.get("/fitbit/subscription/webhook", function (request, response) {
   // Verify code
   // TODO: fork fitbit-node, add subscription stuff, submit PR back to fitbit-node
   var incomingVerificationCode = request.query.verify;
-  if (incomingVerificationCode == process.env.FITBIT_CLIENT_SECRET) {
+  if (incomingVerificationCode == process.env.FITBIT_SUBSCRIPTION_VERIFICATION_CODE) {
     // TODO: Handle incoming subscription notification
     response.status(204).send({});
   } else {
